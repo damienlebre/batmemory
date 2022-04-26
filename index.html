@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <title>Jeu de Memory</title>
+
+    </head>
+        <body>
+            <div class="container">
+                <header class="header">
+                    <h1>Memory Game</h1>
+                    <h2>Batman Edition</h2>
+                </header>
+            
+                <section class="score-panel">
+                    <h3>Scores</h3>
+                    <ul id="star-rating" class="star-rating">
+                        <li class="star"><i class="fa fa-star"></i></li>
+                        <li class="star"><i class="fa fa-star"></i></li>
+                        <li class="star"><i class="fa fa-star"></i></li>
+                    </ul>
+                    <div><span class="moves-counter">0</span> Coups</div>
+                    <div class="timer-container">
+                        <span class="timer"><i class="fa fa-hourglass-start"></i> Chrono: 00:00</span>
+                    </div>
+                    <div class="reset">
+                        <button class="btn reset-btn">Reset <i class="fa fa-repeat"></i></button>
+                    </div>
+                </section>
+            
+                <!-- Modal -->
+                <section class="win-game-modal">
+                    <div id="modal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Félicitation!</h2>
+                            <p>On dirait que Gotham peux compter sr un nouveau héro!</p>
+                            <img class="modal-img" src="images/images/silhouette.png" alt="Vault boy giving the thumbs up from the game fall out">
+                            <button class="btn play-again-btn">Rejouer?</button>
+                        </div>
+                    </div>
+                </section>
+            
+                <ul class="deck"></ul>
+            </div>
+            
+        
+
+            <script type="text/javascript" src="script.js"></script>
+        </body>
+</html>
