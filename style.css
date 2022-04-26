@@ -31,7 +31,9 @@ body {
 	text-align: center;
     min-height: 100vh;
 }
-
+header{
+    padding-top: 16em;
+}
 .container {
 	display: flex;
 	justify-content: center;
@@ -63,12 +65,14 @@ Header
 
 h1 {
 	font-size: 3em;
-	font-weight: 400;
+	font-weight: bold;
+    color: rgb(143, 138, 138);
 }
 
 h2 {
 	font-size: 2.5em;
 	font-weight: 600;
+    color: whitesmoke;
 }
 
 p {
@@ -77,6 +81,7 @@ p {
 
 h3 {
 	font-weight: 400;
+    color: whitesmoke;
 }
 
 /*----------------------------------  
@@ -91,10 +96,15 @@ Section - Score Panel
 .star-rating > li {
 	display: inline-block;
 	padding: 0.5em;
+    
+    color: whitesmoke;
 }
-
+.movesCount{
+    color: whitesmoke;
+}
 .moves-counter {
-	padding: 0.5em;
+	padding: 0.5em;    
+    color: whitesmoke;
 }
 
 .reset-btn {
@@ -150,7 +160,9 @@ https://www.w3schools.com/howto/howto_css_modals.asp
 	padding-right: 2em;
 	width: 80%;
 }
-
+.congrat{
+    color: black;
+}
 /* The Close Button */
 .close {
 	align-self: flex-end;
@@ -208,7 +220,9 @@ Deck of Cards
 }
 
 .card {
-	background: rgb(185, 184, 184);
+	background: url(images/images/cardBack.jpg);
+    background-size: cover;
+    background-position: center;
 	border-radius: 0.5em;
 	height: 7em;
 	width: 7em;

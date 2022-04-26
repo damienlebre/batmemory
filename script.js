@@ -58,7 +58,7 @@ et les distribuent dans les <ul>.
 function startGame() {
 	// joue la fonction suffle sur le jeux de cartes et stock le resultat dans une  const
 	const shuffledDeck = shuffle(deckCards); 
-	// repartie les carte sur la grille de jeu
+	// repartie les cartes sur la grille de jeu
 	for (let i = 0; i < shuffledDeck.length; i++) {
 		// création des <li>
 		const liTag = document.createElement('LI');
@@ -71,7 +71,7 @@ function startGame() {
 		// ajoute et renseigne l'attribut src des  balises images
 		addImage.setAttribute("src", "images/images/" + shuffledDeck[i] + "?raw=true");
 		// ajoute et renseigne un attribut alt aux balises <img>
-		addImage.setAttribute("alt", "image of vault boy from fallout");
+		addImage.setAttribute("alt", "image of batsymbol");
 		// cible tout les enfants de deck (les éléments du tableau) pour leur ajouter la balise <li> 
 		deck.appendChild(liTag);
 	}
@@ -160,12 +160,12 @@ moves the user completes the game, the stars will decrease
 with the more moves the user takes.
 */
 function starRating() {
-	if (moves === 14) {
+	if (moves === 28) {//si coup = ou > a 28 alors plus qu'une étoile
 		// First element child is the <i> within the <li>
 		star[2].firstElementChild.classList.remove("fa-star");
 		starCount--;
 	}
-	if (moves === 18) {
+	if (moves === 18) {//si coup = ou > a 18 et <28 alors plus que deux étoiles
 		star[1].firstElementChild.classList.remove("fa-star");
 		starCount--;
 	}
