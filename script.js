@@ -22,10 +22,15 @@ const movesCount = document.querySelector(".moves-counter");
 //variable pour compter les coups
 let moves = 0;
 
+//cibler div compteur de coup
+const moveScoreCount = document.querySelector(".moveScore");
+//variable pour compter les points
+let moveScore = 100;
+
 // compteur étoiles (score)
 const star = document.getElementById("star-rating").querySelectorAll(".star");
 // Variable de décompte des étoiles
-let starCount = 3;
+let starCount = 5;
 
 // cibler le span du timer
 const timeCounter = document.querySelector(".timer");
@@ -36,6 +41,12 @@ let minutes = 0;
 let seconds = 0;
 // For use in the click card event listener
 let timeStart = false;
+const timeScoreCount = document.querySelector(".timePoint")
+let timePoint = 180;
+//cibler div point user modal
+const userFinalScore = document.querySelector(".userScore");
+//variable pour compter les points
+let finalScore = 0;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -78,10 +89,12 @@ function startGame() {
 		addImage.setAttribute("alt", "image of batsymbol");
 		// cible tout les enfants de deck (les éléments du tableau) pour leur ajouter la balise <li> 
 		deck.appendChild(liTag);
-	}
+	}	
 }
 
 startGame();
+
+	
 
 
 /*
@@ -97,16 +110,23 @@ function timer() {
 				minutes++;
 				seconds = 0;
 			}
+		
 		// afficher dans html le temps total de la partie jusqu'a la victoire.
 		timeCounter.innerHTML = "<i class='fa fa-hourglass-start'></i>" + " Timer: " + minutes + " Mins " + seconds + " Secs" ;
+		timeScoreCount.innerHTML = timePoint--;
 	}, 1000);
+	
 }
+
+	
+	
 
 /*
 Arret du timer lorsque les 14 paires sont découverte
 Used: https://www.w3schools.com/js/js_timing.asp
 */
 function stopTime() {
+
 	clearInterval(time);
 }
 
@@ -131,11 +151,15 @@ function resetEverything() {
 	timeStart = false;
 	seconds = 0;
 	minutes = 0;
+	timePoint=180;
 	timeCounter.innerHTML = "<i class='fa fa-hourglass-start'></i>" + " Timer: 00:00";
-	// Remise a zéro (3) des étoiles et réattribution de la class pour afficher les étoiles
+	// Remise a zéro (5) des étoiles et réattribution de la class pour afficher les étoiles
+	timeScoreCount.innerHTML = 180;
 	star[1].firstElementChild.classList.add("fa-star");
 	star[2].firstElementChild.classList.add("fa-star");
-	starCount = 3;
+	star[3].firstElementChild.classList.add("fa-star");
+	star[4].firstElementChild.classList.add("fa-star");	
+	starCount = 5;	
 	// remise a zéro du compteur de coup et de son affichage html
 	moves = 0;
 	movesCount.innerHTML = 0;
@@ -148,6 +172,7 @@ function resetEverything() {
 	startGame();
 }
 
+
 /*
 Increment the moves counter.  To be called at each
 comparison for every two cards compared add one to the count
@@ -159,18 +184,30 @@ function movesCounter() {
 	moves ++;
 }
 
+function starScore(){
+	moveScore = starCount * 20;
+	moveScoreCount.innerText = moveScore;
+	// console.log(moveScore)
+}
 /*
 Update the star rating.  Depending on the number of
 moves the user completes the game, the stars will decrease
 with the more moves the user takes.
 */
-function starRating() {
-	if (moves === 28) {//si coup = ou > a 28 alors plus qu'une étoile
-		// First element child is the <i> within the <li>
+function starRating() {	
+	if (moves === 30) {//si coup = a 30 alors plus que 1 étoiles.
+		star[4].firstElementChild.classList.remove("fa-star");
+		starCount--;
+	}	
+	if (moves === 25) {//si coup = a 25 alors plus que 2 étoiles.
+		star[3].firstElementChild.classList.remove("fa-star");
+		starCount--;
+	}	
+	if (moves === 20) {//si coup = a 20 alors plus que 3 étoiles.
 		star[2].firstElementChild.classList.remove("fa-star");
 		starCount--;
 	}
-	if (moves === 18) {//si coup = ou > a 18 et <28 alors plus que deux étoiles
+	if (moves === 15) {//si coup = a 18 et <28 alors plus que 4 étoiles.
 		star[1].firstElementChild.classList.remove("fa-star");
 		starCount--;
 	}
@@ -220,6 +257,7 @@ function match() {
 	// Call movesCounter to increment by one
 	movesCounter();
 	starRating();
+	starScore();
 }
 
 /*
@@ -242,6 +280,8 @@ function noMatch() {
 	// Call movesCounter to increment by one
 	movesCounter();
 	starRating();
+	starScore();
+	
 }
 
 /*
@@ -315,17 +355,20 @@ deck.addEventListener("click", function(evt) {
 	if (evt.target.nodeName === "LI") {
 		// To console if I was clicking the correct element 
 		console.log(evt.target.nodeName + " Was clicked");
+		console.log(timePoint);
 		// Start the timer after the first click of one card
 	// Executes the timer() function
 		if (timeStart === false) {
 			timeStart = true; 
 			timer();
+					
 		}
 		// Call flipCard() function
 		flipCard();
+		
 	}
-
-	//Flip the card and display cards img
+		
+		//Flip the card and display cards img
 	function flipCard() {
 		// When <li> is clicked add the class .flip to show img
 		evt.target.classList.add("flip");
