@@ -19,10 +19,10 @@ const playAgain = document.querySelector(".play-again-btn");
 
 //cibler div compteur de coup
 const movesCount = document.querySelector(".moves-counter");
-//variable pour compter les coup(part de 0)
+//variable pour compter les coups
 let moves = 0;
 
-// comteur étoile (rank)
+// compteur étoiles (score)
 const star = document.getElementById("star-rating").querySelectorAll(".star");
 // Variable de décompte des étoiles
 let starCount = 3;
@@ -41,9 +41,13 @@ let timeStart = false;
 function shuffle(array) {
   let currentIndex = array.length, temporaryValue, randomIndex;
 
+  // While there remain elements to shuffle.
   while (currentIndex !== 0) {
+
+		 // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
+	  // And swap it with the current element.
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
@@ -79,16 +83,6 @@ function startGame() {
 
 startGame();
 
-/*
-Remove all child nodes from the deck <li> tags and
-<img> tags.  To be called in set everything function only
-*/
-function removeCard() {
-	// As long as <ul> deck has a child node, remove it
-	while (deck.hasChildNodes()) {
-		deck.removeChild(deck.firstChild);
-	}
-}
 
 /*
 récupérer la valeur du timer dans le html
@@ -104,12 +98,12 @@ function timer() {
 				seconds = 0;
 			}
 		// afficher dans html le temps total de la partie jusqu'a la victoire.
-		timeCounter.innerHTML = "<i class='fa fa-hourglass-start'></i>" + " Timer: " + minutes + " Mins " + secondes + " Secs" ;
+		timeCounter.innerHTML = "<i class='fa fa-hourglass-start'></i>" + " Timer: " + minutes + " Mins " + seconds + " Secs" ;
 	}, 1000);
 }
 
 /*
-Arret du timer lorsqu les 14 paires sont découverte
+Arret du timer lorsque les 14 paires sont découverte
 Used: https://www.w3schools.com/js/js_timing.asp
 */
 function stopTime() {
@@ -117,8 +111,19 @@ function stopTime() {
 }
 
 /*
-Reset all global variables and the content of HTML elements
-timer, stars, moves, and the moves and timer inner HTML
+retirer du deck tout les enfants des balises <li> et <img>.
+To be called in set everything function only
+*/
+function removeCard() {
+	// As long as <ul> deck has a child node, remove it
+	while (deck.hasChildNodes()) {
+		deck.removeChild(deck.firstChild);
+	}
+}
+
+/*
+Remise a zéro des compteurs et de l'affichage html
+(temps, étoiles, coups)
 */
 function resetEverything() {
 	// Stop time, reset the minutes and seconds update the time inner HTML
@@ -127,19 +132,19 @@ function resetEverything() {
 	seconds = 0;
 	minutes = 0;
 	timeCounter.innerHTML = "<i class='fa fa-hourglass-start'></i>" + " Timer: 00:00";
-	// Reset star count and the add the class back to show stars again
+	// Remise a zéro (3) des étoiles et réattribution de la class pour afficher les étoiles
 	star[1].firstElementChild.classList.add("fa-star");
 	star[2].firstElementChild.classList.add("fa-star");
 	starCount = 3;
-	// Reset moves count and reset its inner HTML
+	// remise a zéro du compteur de coup et de son affichage html
 	moves = 0;
 	movesCount.innerHTML = 0;
-	// Clear both arrays that hold the opened and matched cards
+	// Vider les tableaux des paire retrouvés et celui des cartes "ouvertes"
 	matched = [];
 	opened = [];
-	// Clear the deck
+	// vider le deck
 	removeCard();
-	// Create a new deck
+	// créer le deck
 	startGame();
 }
 
